@@ -1,0 +1,9 @@
+.alertcolor-info {
+    background-color: rgb(253, 235, 138  );
+}
+.alertcolor-error  {
+    background-color: rgb(255, 121, 121);
+}
+.alertcolor-success {
+    background-color: rgb(138, 253, 138  );
+}

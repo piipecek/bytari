@@ -1,0 +1,12 @@
+{%extends "index.html"%}
+{%block content%}
+
+<form method="post">
+	<h2>Zaregistruj se:</h2>
+	Email:
+	<input type="email" name="email" id="email" required maxlength="100"/>
+	Heslo
+	<input type="password" name="password" id="password" maxlength="300"/>
+	<button type="submit">Register</button>
+</form>
+{%endblock%}

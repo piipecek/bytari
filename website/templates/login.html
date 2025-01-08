@@ -1,0 +1,15 @@
+{%extends "index.html"%}
+{%block content%}
+
+<form method="post">
+	<h2> Přihlas se </h2>
+	Email
+	<input type="text" name="email" id="email" maxlength="100"/>
+	Heslo
+	<input type="password" name="password" id="password" maxlength="300"/>	
+	<button type="submit">Log-in</button>
+	<small>
+		Zapomněli jste heslo? <a href="t.me/piipecek"><i>to se nedá nic dělat.</i></a>
+	</small>
+</form>
+{%endblock%}
