@@ -3,7 +3,7 @@
 Jde o systém, jehož cílem je mít content za přihlášením
 
 # spuštění na lokálu
-kontaktovat [t.me/piipecek](Pípa), nebo
+kontaktovat [Pípa](https://t.me/piipecek), nebo
 
 1) git clone na svůj počítač
 2) `pipenv install` ve složce
