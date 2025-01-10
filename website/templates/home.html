@@ -2,7 +2,23 @@
 
 {% block content %}
 
-<h1>Bytari</h1>
-<p>ey</p>
+<div class="container-fluid vh-100 d-flex flex-column">
+    <div class="row flex-grow-1">
+        <!-- Column 1 -->
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center twenty">
+        <h1>Bytaři</h1>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center eighty">
+            <div class="form-outer">
+                <input type="text" class="input" placeholder="vstupní kód">
+                <input type="text" class="input" placeholder="jméno">
+                <input type="text" class="input" placeholder="telefoní číslo">
+                <button class="input-button">Pokračovat</button>
+            </div>
+        </div>
+    </div>
+  </div>
 
 {% endblock %}
