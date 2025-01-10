@@ -12,21 +12,6 @@
 </head>
 
 <body class="m-0 p-0">
-
-    <!-- <a href="{{url_for('guest_views.home')}}"> Domů </a>
-    {% if current_user.is_authenticated %}
-        <a href="{{url_for('user_views.dashboard')}}"> Dashboard </a>
-        <a href="{{url_for('auth_views.logout')}}"> Odhlásit se </a>
-    {% else %}
-        <a href="{{url_for('auth_views.login')}}"> Přihlásit se </a>
-        <a href="{{url_for('auth_views.register')}}"> Registrovat se </a>
-    {% endif %} -->
-
-    {% for category, message in get_flashed_messages(with_categories=True) %}
-    <div class="alertcolor-{{category}}">
-        {{message}}
-    </div>
-    {% endfor %}
         
     {% block content %}
     {% endblock %}

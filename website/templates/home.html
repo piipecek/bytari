@@ -12,10 +12,12 @@
         <!-- Column 2 -->
         <div class="col-md-6 d-flex flex-column justify-content-center align-items-center eighty">
             <div class="form-outer">
-                <input type="text" class="input" placeholder="vstupní kód">
-                <input type="text" class="input" placeholder="jméno">
-                <input type="text" class="input" placeholder="telefoní číslo">
-                <button class="input-button">Pokračovat</button>
+                <form method="post">
+                    <input type="text" class="input" placeholder="vstupní kód" name="kod">
+                    <input type="text" class="input" placeholder="jméno" name="jmeno">
+                    <input type="text" class="input" placeholder="telefoní číslo" name="telefon">
+                    <button class="input-button" type="submit">Pokračovat</button>
+                </form>
             </div>
         </div>
     </div>
