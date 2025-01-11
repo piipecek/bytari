@@ -1,8 +1,15 @@
 from flask import Flask, render_template
+import json
+from pathlib import Path
+volno_path = Path('volno.json')
 
 def create_app() -> Flask:
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "abcd"
+    
+    if not volno_path.exists():
+        with volno_path.open("w") as f:
+            json.dump([], f)
 
 
     from .views import views

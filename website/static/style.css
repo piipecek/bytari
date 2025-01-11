@@ -37,6 +37,7 @@ body{
     border: 1px solid black;
     color: black;
     background-color: #FBE9EB;
+    text-align: center;
 }
 .input-button {
     width: 100%;
@@ -49,22 +50,64 @@ body{
 
 .input:hover {
     background-color: white;
+    text-align: center;
+}
+.input:hover::placeholder{
+    color: gray;
 }
 
 .input-button:hover {
     background-color: white;
+    color: gray
 }
 
 .input:focus {
     background-color: white;
 }
 
-::placeholder {
+.input:focus::placeholder{
+    color: gray;
+}
+
+.input::placeholder {
     color: black;
     opacity: 1;
     text-align: center;
 }
 
+.navb {
+    display: flex;
+}
+.navbar-item {
+    padding: 1rem;
+}
+.navlink {
+    color: black;
+    text-decoration: none;
+}
+
+.custom-button{
+    background-color: #FBE9EB;
+    color: black;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.custom-delete-button {
+    background-color: #FBE9EB;
+    color: black;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.custom-delete-button:hover {
+    background-color: white;
+}
 
 @media (max-width: 768px) {
     .twenty {
