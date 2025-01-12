@@ -8,7 +8,7 @@
     background-color: rgb(138, 253, 138  );
 }
 body{
-    background-color: #E6C2BF !important;
+    background-color: #A18F63 !important;
     font-family: 'Garet', sans-serif !important;
                                                 
 }
@@ -18,11 +18,14 @@ body{
 }
 .eighty{
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-outer{
     width: 50%;
-    background-color: #FBE9EB;
+    background-color: #F1EBE5;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +39,7 @@ body{
     margin-bottom: 20px;
     border: 1px solid black;
     color: black;
-    background-color: #FBE9EB;
+    background-color: #F1EBE5;
     text-align: center;
 }
 .input-button {
@@ -44,7 +47,7 @@ body{
     padding: 10px;
     border: 1px solid black;
     color: black;
-    background-color: #FBE9EB;
+    background-color: #F1EBE5;
     cursor: pointer;
 }
 
@@ -87,7 +90,7 @@ body{
 }
 
 .custom-button{
-    background-color: #FBE9EB;
+    background-color: #F1EBE5;
     color: black;
     border: 1px solid black;
     border-radius: 3px;
@@ -96,17 +99,62 @@ body{
     margin-top: 1rem;
 }
 
+.custom-button:hover {
+    background-color: white;
+}
+
 .custom-delete-button {
-    background-color: #FBE9EB;
+    background-color: #F1EBE5;
     color: black;
     border: 1px solid black;
     border-radius: 3px;
     padding: 5px;
     cursor: pointer;
 }
+.logo {
+    width: 200px;
+}
+
+.clovek {
+    width: 60%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.checkbox{
+    width: 20px;
+    height: 20px;
+}
 
 .custom-delete-button:hover {
     background-color: white;
+}
+
+
+.terminy-wrapper{
+    display: flex;
+    justify-content: center;
+}
+.terminy {
+    background-color: #F1EBE5;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 80%;
+
+}
+
+.termin{
+    background-color: #A18F63;
+    padding: 1rem;
+    border: 1px solid black;
+    margin: 1rem;
+}
+.casove-okno{
+    font-weight: bold;
+}
+.link{
+    text-decoration: none;
+    color: darkblue
 }
 
 @media (max-width: 768px) {
@@ -115,6 +163,8 @@ body{
     }
     .eighty{
         height: 80% !important; /* Allows height to adjust to fit content */
+        padding-top: 3rem;
+        align-items: start;
     }
     .form-outer{
         width: 100%;

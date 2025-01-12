@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center my-5">
+    <h1>Vybrat člověka</h1>
+</div>
+<form method="post">
+
+    <div class="row">
+        <div class="col-sm d-flex align-items-center flex-column mb-4">
+            <img src="{{url_for('static', filename='img/jenda.jpg')}}" alt="obrázek člověka" class="clovek" id="Jenda_img">
+            <div class="mt-2 d-flex align-items-center">
+                <input type="checkbox" name="Jenda" id="Jenda" class="checkbox">
+                <label for="Jenda">Jenda</label>
+            </div>
+        </div>
+        <div class="col-sm d-flex align-items-center flex-column mb-4">
+            <img src="{{url_for('static', filename='img/kuba.jpg')}}" alt="obrázek člověka" class="clovek" id="Kuba_img">
+            <div class="mt-2">
+                <input type="checkbox" name="Kuba" id="Kuba" class="checkbox">
+                <label for="Kuba">Kuba</label>
+            </div>
+        </div>
+        <div class="col-sm d-flex align-items-center flex-column mb-4">
+            <img src="{{url_for('static', filename='img/marek.jpg')}}" alt="obrázek člověka" class="clovek" id="Marek_img">
+            <div class="mt-2">
+                <input type="checkbox" name="Marek" id="Marek" class="checkbox">
+                <label for="Marek">Marek</label>
+            </div>
+        </div>
+        <div class="col-sm d-flex align-items-center flex-column mb-4">
+            <img src="{{url_for('static', filename='img/rocco.jpg')}}" alt="obrázek člověka" class="clovek" id="Rocco_img">
+            <div class="mt-2">
+                <input type="checkbox" name="Rocco" id="Rocco" class="checkbox">
+                <label for="Rocco">Rocco</label>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center my-5">
+        <button type="submit" class="custom-button">Odeslat</button>
+    </div>
+</form>
+
+<script type="module" src="{{url_for('static', filename='vybrat_cloveka.js')}}"></script>
+{% endblock %}

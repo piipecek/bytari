@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="d-flex flex-column align-items-center">
+    <h1 class="my-5">Shrnutí pozvánky</h1>
+    <div>Kde: <a class="link" href="https://mapy.cz/s/cobasakono">Jeseniova 245/1</a></div>
+    <div>zvonek vlevo nahoře</div>
+    <div>Kdy: {{pozvanka["datum"]}}</div>
+    <div>V kolik: {{pozvanka["cas"]}}</div>
+    <div>Na jak dlouho: {{pozvanka["doba"]}}</div>
+    <div>Koho potkám: {{koho_potkam}}</div>
+    <div>S přespáním: {{prespani}}</div>
+    <h1 class="my-5">Těšíme se!</h1>
+</div>
+
+
+{% endblock %}

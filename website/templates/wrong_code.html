@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5">
+    <h2>Tento kód neexistuje.</h2>
+    <p>
+        Zadat ho můžete <a href="{{ url_for('views.home') }}">znovu</a>.
+    </p>
+</div>
+
+{% endblock %}

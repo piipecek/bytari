@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block content %}
+<input hidden id="lidi" value="{{ lidi }}">
+
+<div class="d-flex justify-content-center my-5">
+    <h1>Vybrat termín s {{lidi_pretty}}</h1>
+</div>
+
+<div class="terminy-wrapper" id="terminy-wrapper">
+
+    <div class="terminy" id="terminy">
+    </div>
+</div>
+
+<div id="zadne_terminy" class="d-flex justify-content-center my-5">
+    <h3>Bohužel nejsou žádné termíny k dispozici.</h3>
+</div>
+
+<script type="module" src="{{url_for('static', filename='vybrat_termin.js')}}"></script>
+
+{% endblock %}

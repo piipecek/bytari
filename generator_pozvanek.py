@@ -16,7 +16,7 @@ if not pozvanky_path.exists():
     for i, triplet in enumerate(triplety):
         pozvanka = {
             "id": i,
-            "kod": triplet,
+            "kod": triplet.strip().replace("\n", ""),
             "jmeno": "",
             "cislo": "",
             "datum": "",

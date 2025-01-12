@@ -6,21 +6,49 @@
     <div class="row flex-grow-1">
         <!-- Column 1 -->
         <div class="col-md-6 d-flex flex-column justify-content-center align-items-center twenty">
-        <h1>Bytaři</h1>
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="logo">
+            <h1>Bytaři</h1>
         </div>
 
         <!-- Column 2 -->
-        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center eighty">
+        <div class="col-md-6 eighty">
             <div class="form-outer">
-                <form method="post">
-                    <input type="text" class="input" placeholder="vstupní kód" name="kod">
-                    <input type="text" class="input" placeholder="jméno" name="jmeno">
-                    <input type="text" class="input" placeholder="telefoní číslo" name="telefon">
-                    <button class="input-button" type="submit">Pokračovat</button>
+                <form method="post" id="form">
+                    <input type="text" class="input" placeholder="vstupní kód" name="kod", id="kod">
+                    <input type="text" class="input" placeholder="jméno" name="jmeno", id="jmeno">
+                    <input type="text" class="input" placeholder="telefoní číslo" name="telefon", id="telefon">
+                    <button class="input-button" type="button" id="button">Pokračovat</button>
                 </form>
             </div>
         </div>
     </div>
-  </div>
+</div>
+
+<script>
+    function validate_phone(phone) {
+        phone = phone.replace(" ", "")
+        if (phone.length == 9) {
+            return "+420"+phone;
+        } else if (phone[0] == "+") {
+            return phone;
+        } else if (phone[0] == "0" && phone[1] == "0") {
+            return "+"+phone.replace(/^0+/, "+");
+        } else {
+            return phone;
+        }
+    }
+    document.getElementById("button").addEventListener("click", function() {
+        let kod = document.getElementById("kod").value;
+        var jmeno = document.getElementById("jmeno").value;
+        let telefon = validate_phone(document.getElementById("telefon").value);
+        document.getElementById("telefon").value = telefon;
+        console.log(kod, jmeno, telefon);
+        if (kod.length == 0 || jmeno.length == 0 || telefon.length == 0) {
+            alert("Vyplňte všechny údaje.");
+        } else {
+            document.getElementById("form").submit();
+        }
+    });
+</script>
 
 {% endblock %}

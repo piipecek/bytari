@@ -55,24 +55,15 @@ submit_button.addEventListener("click", function() {
         let date = row.children[0].value;
         let start_time = row.children[2].value;
         let end_time = row.children[4].value;
-        let start_date = new Date(date);
-        let end_date = new Date(date);
-        start_date.setHours(start_time.split(":")[0]);
-        start_date.setMinutes(start_time.split(":")[1]);
-        end_date.setHours(end_time.split(":")[0]);
-        end_date.setMinutes(end_time.split(":")[1]);
-        if (start_date >= end_date) {
+        if (!date || !start_time || !end_time) {
             error = true;
             break;
         }
-        try {
-            let s = start_date.toISOString();
-            let e = end_date.toISOString();
-        } catch (e) {
-            error = true;
-            break;
-        }
-        result["dates"].push({"date": date, "start": start_date.toISOString(), "end": end_date.toISOString()});
+        result["dates"].push({
+            "date": date,
+            "start": start_time,
+            "end": end_time
+        })
     }
     if (error) {
         alert("Chyba v zadávání času, opravte ji.");
@@ -83,21 +74,17 @@ submit_button.addEventListener("click", function() {
 })
 
 for (let v of volno) {
-    console.log(v);
     let tr = document.createElement("tr");
+    let td1 = document.createElement("td");
     let td2 = document.createElement("td");
     let td3 = document.createElement("td");
     let td4 = document.createElement("td");
     let td5 = document.createElement("td");
 
-    function pretty_time_from_iso(iso) {
-        let date = new Date(iso);
-        return date.toLocaleTimeString();
-    }
-
-    td2.innerText = v["jmeno"];
-    td3.innerText = pretty_time_from_iso(v["start"]);
-    td4.innerText = pretty_time_from_iso(v["end"]);
+    td1.innerText = v["jmeno"];
+    td2.innerText = v["date"];
+    td3.innerText = v["start"];
+    td4.innerText = v["end"];
 
     let smazat_button = document.createElement("button");
     smazat_button.innerText = "Smazat";
@@ -107,6 +94,7 @@ for (let v of volno) {
     smazat_button.classList.add("custom-delete-button");
     td5.appendChild(smazat_button);
 
+    tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
     tr.appendChild(td4);
