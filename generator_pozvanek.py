@@ -20,8 +20,11 @@ if not pozvanky_path.exists():
             "jmeno": "",
             "cislo": "",
             "datum": "",
+            "cas": "",
             "doba": "",
-            "odemcena": True 
+            "odemcena": True,
+            "prespat": False,
+            "kdo": []
         }
         pozvanky.append(pozvanka)
 
