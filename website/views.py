@@ -93,15 +93,18 @@ def vybrat_termin(kod):
         if existuje_kod_zdrcnuty(kod):
             lidi = session.get("lidi")
             lidi_pretty = []
-            if "Kuba" in lidi:
-                lidi_pretty.append("Kubou")
             if "Jenda" in lidi:
                 lidi_pretty.append("Jendou")
+            if "Kuba" in lidi:
+                lidi_pretty.append("Kubou")
             if "Marek" in lidi:
                 lidi_pretty.append("Markem")
             if "Rocco" in lidi:
                 lidi_pretty.append("Roccem")
-            pretty_string = ", ".join(lidi_pretty[:-1]) + " a " + lidi_pretty[-1]
+            if (len(lidi) == 1):
+                pretty_string = lidi_pretty[0]
+            else:
+                pretty_string = ", ".join(lidi_pretty[:-1]) + " a " + lidi_pretty[-1]
             return render_template("vybrat_termin.html", lidi=json.dumps(lidi), lidi_pretty=pretty_string)
         else:
             return redirect(url_for("views.wrong_code"))
