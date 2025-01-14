@@ -159,7 +159,10 @@ def summary(kod):
             koho_potkam_list.append("Marka")
         if "Rocco" in pozvanka["kdo"]:
             koho_potkam_list.append("Rocca")
-        koho_potkam = ", ".join(koho_potkam_list[:-1]) + " a " + koho_potkam_list[-1] 
+        if len(koho_potkam_list) == 1:
+            koho_potkam = koho_potkam_list[0]
+        else:
+            koho_potkam = ", ".join(koho_potkam_list[:-1]) + " a " + koho_potkam_list[-1] 
         prespani = "Ano" if pozvanka["prespat"] else "Ne"
         return render_template("summary.html", pozvanka=pozvanka, koho_potkam=koho_potkam, prespani=prespani)
     else:
