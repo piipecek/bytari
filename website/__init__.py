@@ -1,12 +1,25 @@
 from flask import Flask, render_template
+from flask_mail import Mail
 import json
 from pathlib import Path
-volno_path = Path('volno.json')
+from dotenv import load_dotenv
+import os
+
+load_dotenv(dotenv_path=Path.cwd() / ".env")
+mail = Mail()
 
 def create_app() -> Flask:
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "abcd"
+    app.config["MAIL_SERVER"] = os.environ.get("MAIL_SERVER")
+    app.config["MAIL_PORT"] = os.environ.get("MAIL_PORT")
+    app.config["MAIL_USE_SSL"] = True
+    app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
+    app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
     
+    mail.init_app(app)
+    
+    volno_path = Path('volno.json')
     if not volno_path.exists():
         with volno_path.open("w") as f:
             json.dump([], f)

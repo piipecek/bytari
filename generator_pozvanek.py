@@ -18,13 +18,14 @@ if not pozvanky_path.exists():
             "id": i,
             "kod": triplet.strip().replace("\n", "").replace(",", "").replace(" ", ""),
             "jmeno": "",
-            "cislo": "",
+            "email": "",
             "datum": "",
             "cas": "",
             "doba": "",
             "odemcena": True,
             "prespat": False,
-            "kdo": []
+            "kdo": [],
+            "poznamka": ""
         }
         pozvanky.append(pozvanka)
 

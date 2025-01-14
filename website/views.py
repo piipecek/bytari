@@ -2,9 +2,25 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from .pozvanky_handling import vynulovat_by_id, toggle_zamknuti_by_id, get_pozvanky, existuje_kod_zdrcnuty, save_pozvanky, get_pozvanka_by_kod, update_pozvanka
 from .volno_handling import ulozit_nove_volno, delete_volno_by_id
 import json
+from .mail_handler import mail_sender
+import os
 
 
 views = Blueprint("views",__name__)
+
+def sanitize_kod(kod):
+    kod = kod.replace(" ", "")
+    kod = kod.replace(",", "")
+    kod = kod.replace(".", "")
+    kod = kod.replace("-", "")
+    kod = kod.replace("_", "")
+    kod = kod.replace(";", "")
+    kod = kod.replace(":", "")
+    kod = kod.strip()
+    kod = kod.lower()
+    
+    return kod
+    
 
 
 @views.route("/", methods=["GET", "POST"])
@@ -13,14 +29,12 @@ def home():
         return render_template("home.html")
     else:
         kod = request.form.get("kod")
-        kod = kod.replace(" ", "").replace(",","").strip()
+        kod = sanitize_kod(kod)
         pozvanka = get_pozvanka_by_kod(kod)
-        print(kod, pozvanka)
         if pozvanka:
-            print("here")
             if pozvanka["odemcena"]:
                 pozvanka["jmeno"] = request.form.get("jmeno")
-                pozvanka["cislo"] = request.form.get("telefon")
+                pozvanka["email"] = request.form.get("email")
                 update_pozvanka(pozvanka)
                 return redirect(url_for("views.vybrat_cloveka", kod=kod))
             else:
@@ -63,8 +77,12 @@ def wrong_code():
 @views.route("/vybrat_cloveka/<string:kod>", methods=["GET", "POST"])
 def vybrat_cloveka(kod):
     if request.method == "GET":
-        if existuje_kod_zdrcnuty(kod):
-            return render_template("vybrat_cloveka.html")
+        pozvanka = get_pozvanka_by_kod(kod)
+        if pozvanka:
+            if pozvanka["odemcena"]:
+                return render_template("vybrat_cloveka.html")
+            else:
+                return redirect(url_for("views.summary", kod=kod))
         else:
             return redirect(url_for("views.wrong_code"))
     else:
@@ -90,24 +108,29 @@ def vybrat_cloveka(kod):
 @views.route("/vybrat_termin/<string:kod>", methods=["GET", "POST"])
 def vybrat_termin(kod):
     if request.method == "GET":
-        if existuje_kod_zdrcnuty(kod):
-            lidi = session.get("lidi")
-            lidi_pretty = []
-            if "Jenda" in lidi:
-                lidi_pretty.append("Jendou")
-            if "Kuba" in lidi:
-                lidi_pretty.append("Kubou")
-            if "Marek" in lidi:
-                lidi_pretty.append("Markem")
-            if "Rocco" in lidi:
-                lidi_pretty.append("Roccem")
-            if (len(lidi) == 1):
-                pretty_string = lidi_pretty[0]
+        pozvanka = get_pozvanka_by_kod(kod)
+        if pozvanka:
+            if pozvanka["odemcena"]:
+                lidi = session.get("lidi")
+                lidi_pretty = []
+                if "Jenda" in lidi:
+                    lidi_pretty.append("Jendou")
+                if "Kuba" in lidi:
+                    lidi_pretty.append("Kubou")
+                if "Marek" in lidi:
+                    lidi_pretty.append("Markem")
+                if "Rocco" in lidi:
+                    lidi_pretty.append("Roccem")
+                if (len(lidi) == 1):
+                    pretty_string = lidi_pretty[0]
+                else:
+                    pretty_string = ", ".join(lidi_pretty[:-1]) + " a " + lidi_pretty[-1]
+                return render_template("vybrat_termin.html", lidi=json.dumps(lidi), lidi_pretty=pretty_string)
             else:
-                pretty_string = ", ".join(lidi_pretty[:-1]) + " a " + lidi_pretty[-1]
-            return render_template("vybrat_termin.html", lidi=json.dumps(lidi), lidi_pretty=pretty_string)
+                return redirect(url_for("views.summary", kod=kod))
         else:
             return redirect(url_for("views.wrong_code"))
+        
     else:
         pozvanka = get_pozvanka_by_kod(kod)
         pozvanka["datum"] = request.form.get("datum")
@@ -115,9 +138,11 @@ def vybrat_termin(kod):
         pozvanka["cas"] = request.form.get("kdy")
         pozvanka["prespat"] = request.form.get("prespat") == "on"
         pozvanka["odemcena"] = False
+        pozvanka["poznamka"] = request.form.get("poznamka")
         update_pozvanka(pozvanka)
         
-        # smska
+        mail_sender("tva_rezervace", pozvanka["email"], data=kod)
+        mail_sender("nova_rezervace", os.environ.get("MAIL_USERNAME"), data=pozvanka["jmeno"]) 
         
         return redirect(url_for("views.summary", kod=kod))
 

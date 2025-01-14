@@ -28,13 +28,14 @@ def vynulovat_by_id(id_: int) -> None:
     for pozvanka in pozvanky:
         if pozvanka["id"] == id_:
             pozvanka["jmeno"] = ""
-            pozvanka["cislo"] = ""
+            pozvanka["email"] = ""
             pozvanka["datum"] = ""
             pozvanka["doba"] = ""
             pozvanka["odemcena"] = True
             pozvanka["kdo"] = []
             pozvanka["cas"] = ""
             pozvanka["prespat"] = False
+            pozvanka["poznamka"] = ""
     
     save_pozvanky(pozvanky)
 

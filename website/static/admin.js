@@ -5,7 +5,6 @@ let pozvanky = JSON.parse(httpGet("/pozvanky"))
 let tbody = document.querySelector("tbody")
 
 for (let pozvanka of pozvanky) {
-    console.log(pozvanka)
     let tr = document.createElement("tr")
     let td1 = document.createElement("td")
     let td2 = document.createElement("td")
@@ -18,17 +17,19 @@ for (let pozvanka of pozvanky) {
     let td9 = document.createElement("td")
     let td10 = document.createElement("td")
     let td11 = document.createElement("td")
+    let td12 = document.createElement("td")
 
     td1.innerText = pozvanka["id"]
     td2.innerText = pozvanka["kod"]
     td3.innerText = pozvanka["jmeno"]
-    td4.innerText = pozvanka["cislo"]
+    td4.innerText = pozvanka["email"]
     td5.innerText = pozvanka["datum"]
     td6.innerText = pozvanka["cas"]
     td7.innerText = pozvanka["doba"]
     td8.innerText = pozvanka["kdo"]
-    td9.innerText = pozvanka["prespat"]
-    td10.innerText = pozvanka["odemcena"]
+    td9.innerText = pozvanka["poznamka"]
+    td10.innerText = pozvanka["prespat"]
+    td11.innerText = pozvanka["odemcena"]
 
 
     let button1 = document.createElement("button")
@@ -49,8 +50,8 @@ for (let pozvanka of pozvanky) {
     button2.type = "submit"
     button2.classList.add("btn", "btn-dark")
 
-    td11.appendChild(button1)
-    td11.appendChild(button2)
+    td12.appendChild(button1)
+    td12.appendChild(button2)
 
     tr.appendChild(td1)
     tr.appendChild(td2)
@@ -63,6 +64,7 @@ for (let pozvanka of pozvanky) {
     tr.appendChild(td9)
     tr.appendChild(td10)
     tr.appendChild(td11)
+    tr.appendChild(td12)
 
     tbody.appendChild(tr)
 }

@@ -157,6 +157,17 @@ body{
     color: darkblue
 }
 
+.textarea-div{
+    display: flex;
+    justify-content: center;
+}
+.textarea{
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #F1EBE5;
+}
+
 @media (max-width: 768px) {
     .twenty {
       height: auto !important; /* Allows height to adjust to fit content */

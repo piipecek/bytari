@@ -5,7 +5,6 @@ let lidi = JSON.parse(lidi_input.value);
 
 let terminy = JSON.parse(httpGet("/terminy/"+JSON.stringify(lidi)))
 
-console.log(terminy)
 
 if (terminy.length == 0){
     document.getElementById("zadne_terminy").style.display = "flex";
@@ -44,9 +43,9 @@ function generovat_terminy(terminy){
     
         let kdy_prijit_div = document.createElement('div');
         kdy_prijit_div.innerText = "Kdy chci přijít: "
-        let date_input = document.createElement('input');
-        date_input.name = "kdy";
-        date_input.type = "time";
+        let time_input = document.createElement('input');
+        time_input.name = "kdy";
+        time_input.type = "time";
     
         let na_jak_dlouho_div = document.createElement('div');
         na_jak_dlouho_div.innerText = "Na jak dlouho: "
@@ -78,6 +77,15 @@ function generovat_terminy(terminy){
         prespat_input.type = "checkbox";
         prespat_input.name = "prespat";
         prespat_input.classList.add("checkbox");
+
+        let textarea_div = document.createElement('div');
+        textarea_div.classList.add("textarea-div");
+        textarea_div.hidden = true;
+        let textarea = document.createElement('textarea');
+        textarea.name = "poznamka";
+        textarea.placeholder = "Poznámka";
+        textarea.classList.add("textarea", "mt-2");
+        textarea.rows = 2
     
         let odeslat_div = document.createElement('div');
         odeslat_div.classList.add('d-flex', "justify-content-center");
@@ -87,10 +95,18 @@ function generovat_terminy(terminy){
         button.classList.add('custom-button');
 
         button.addEventListener('click', function(){
-            if (date_input.value == ""){
+            if (time_input.value == ""){
                 alert("Vyplňte prosím všechny údaje");
             } else {
                 form.submit();
+            }
+        })
+
+        time_input.addEventListener('change', function(){
+            if (this.value) {
+                textarea_div.hidden = false;
+            } else {
+                textarea_div.hidden = true;
             }
         })
 
@@ -101,6 +117,7 @@ function generovat_terminy(terminy){
     
         form.appendChild(termin_div);
         termin_div.appendChild(row);
+        termin_div.appendChild(textarea_div);
         termin_div.appendChild(odeslat_div);
         row.appendChild(col1);
         row.appendChild(col2);
@@ -109,7 +126,7 @@ function generovat_terminy(terminy){
         col1.appendChild(od_div);
         col1.appendChild(do_div);
         col2.appendChild(kdy_prijit_div);
-        kdy_prijit_div.appendChild(date_input);
+        kdy_prijit_div.appendChild(time_input);
         col2.appendChild(na_jak_dlouho_div);
         na_jak_dlouho_div.appendChild(select);
         select.appendChild(option1);
@@ -120,6 +137,7 @@ function generovat_terminy(terminy){
         select.appendChild(option6);
         col2.appendChild(prespat_div);
         prespat_div.appendChild(prespat_input);
+        textarea_div.appendChild(textarea);
         odeslat_div.appendChild(button);
         form.appendChild(datum_input);
     
